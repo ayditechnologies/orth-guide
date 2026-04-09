@@ -40,6 +40,18 @@
     .nav-links span { cursor: pointer; color: rgba(255,255,255,0.80); font-size: 15px; font-weight: 500; font-family: var(--font-body); transition: color 0.2s; white-space: nowrap; }
     .nav-links span:hover { color: #fff; }
     .nav-links span.active { color: #fff; }
+    /* Mobile dropdown — hidden on desktop */
+    .lang-switcher { display: none; position: relative; }
+    .lang-btn { background: none; border: none; padding: 0; display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.80); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; }
+    .lang-btn:hover { color: #fff; }
+    .lang-btn svg { transition: transform 0.2s; flex-shrink: 0; }
+    .lang-btn.open svg { transform: rotate(180deg); }
+    .lang-dropdown { position: absolute; top: calc(100% + 10px); right: 0; background: rgba(14,17,21,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 14px; padding: 6px; min-width: 150px; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.18s, transform 0.18s; z-index: 200; }
+    .lang-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .lang-option { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; border-radius: 9px; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); cursor: pointer; transition: background 0.15s, color 0.15s; }
+    .lang-option:hover { color: rgba(255,255,255,0.90); }
+    .lang-option.active { color: #fff; font-weight: 600; }
+    .lang-option.active::after { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: #85aa7b; }
 
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; }
     .hero-content { max-width: 1400px; width: 100%; margin: 0 auto; padding: 0 80px 80px; }
@@ -116,10 +128,11 @@
     /* ═══ MOBILE RESPONSIVE — comment entire block to revert ═══════════ */
     @media (max-width: 768px) {
 
-      /* 1. NAV — shrink links so they don't collide with logo */
+      /* 1. NAV — dropdown on mobile, flat links hidden */
       nav { padding: 0 24px; }
-      .nav-links { gap: 14px; }
-      .nav-links span { font-size: 12px; }
+      .nav-links { display: none; }
+      .nav-right { width: auto; }
+      .lang-switcher { display: block; }
 
       /* 2. HERO */
       .hero-content { padding: 0 24px 60px; }
@@ -183,7 +196,7 @@
         scrollbar-width: none;
       }
       .web-iframe-scroll::-webkit-scrollbar { display: none; }
-      .web-iframe { transform: none !important; width: 1240px !important; margin-bottom: 0 !important; }
+      .web-iframe { transform: scale(0.7); transform-origin: top left; width: 1240px !important; margin-bottom: calc((0.7 - 1) * 714px) !important; margin-right: calc(1240px * (0.7 - 1)) !important; }
 
       /* 8. ALL OTHER SECTIONS + FOOTER */
       .extra-section { padding: 80px 24px; }
@@ -209,13 +222,25 @@
     <img src="https://raw.githubusercontent.com/ayditechnologies/orth/ORTH-Logo/ORTH%20Logo-SageonDark.svg" width="30" height="30" alt="ORTH" />
   </span>
   <ul class="nav-links">
-    <li><span class="active" onclick="setLang(this,'en')">English</span></li>
-    <li><span onclick="setLang(this,'es')">Español</span></li>
-    <li><span onclick="setLang(this,'pt')">Português</span></li>
-    <li><span onclick="setLang(this,'fr')">Français</span></li>
-    <li><span onclick="setLang(this,'de')">Deutsch</span></li>
+    <li><span class="active" onclick="chooseLang(null,'en','English')">English</span></li>
+    <li><span onclick="chooseLang(null,'es','Español')">Español</span></li>
+    <li><span onclick="chooseLang(null,'pt','Português')">Português</span></li>
+    <li><span onclick="chooseLang(null,'fr','Français')">Français</span></li>
+    <li><span onclick="chooseLang(null,'de','Deutsch')">Deutsch</span></li>
   </ul>
-  <div class="nav-right"></div>
+  <div class="nav-right lang-switcher" id="lang-switcher">
+    <button class="lang-btn" id="lang-btn" onclick="toggleLangDropdown()">
+      <span id="lang-label">English</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lang-dropdown" id="lang-dropdown">
+      <div class="lang-option active" onclick="chooseLang(this,'en','English')">English</div>
+      <div class="lang-option" onclick="chooseLang(this,'es','Español')">Español</div>
+      <div class="lang-option" onclick="chooseLang(this,'pt','Português')">Português</div>
+      <div class="lang-option" onclick="chooseLang(this,'fr','Français')">Français</div>
+      <div class="lang-option" onclick="chooseLang(this,'de','Deutsch')">Deutsch</div>
+    </div>
+  </div>
 </nav>
 
 <div class="hero">
@@ -2027,9 +2052,31 @@ function updateWebIframe() {
   iframe.srcdoc = buildWebSrcdoc();
 }
 
-function setLang(el, lang) {
-  document.querySelectorAll('.nav-links span').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
+function toggleLangDropdown() {
+  const btn = document.getElementById('lang-btn');
+  const dd = document.getElementById('lang-dropdown');
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+}
+
+function chooseLang(el, lang, label) {
+  // Update dropdown active state
+  document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+  if (el) el.classList.add('active');
+  // Update flat nav active state
+  document.querySelectorAll('.nav-links span').forEach(o => {
+    o.classList.toggle('active', o.textContent === label);
+  });
+  // Update button label
+  document.getElementById('lang-label').textContent = label;
+  // Close dropdown
+  document.getElementById('lang-btn').classList.remove('open');
+  document.getElementById('lang-dropdown').classList.remove('open');
+  // Apply translation
+  setLang(lang);
+}
+
+function setLang(lang) {
   LANG = lang || 'en';
   applyTranslations();
   rebuildScreens();
@@ -2101,6 +2148,14 @@ updateWebIframe();
   };
   document.head.appendChild(s);
 })();
+
+document.addEventListener('click', (e) => {
+  const sw = document.getElementById('lang-switcher');
+  if (sw && !sw.contains(e.target)) {
+    document.getElementById('lang-btn').classList.remove('open');
+    document.getElementById('lang-dropdown').classList.remove('open');
+  }
+});
 
 window.addEventListener('scroll', () => {
   document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 20);
