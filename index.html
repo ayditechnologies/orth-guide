@@ -86,10 +86,12 @@
     .web-iframe { width: 100%; height: 714px; border: none; border-radius: 14px; display: block; }
 
     .download-card { background: #1e2226; border-radius: 20px; padding: 40px; margin-top: 40px; display: flex; align-items: center; gap: 32px; max-width: 560px; }
-    .download-card-icon { width: 64px; height: 64px; background: #fff; border-radius: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .download-card-icon { width: 80px; height: 80px; aspect-ratio: 1 / 1; flex-shrink: 0; background: #fff; border-radius: 26px; display: flex; align-items: center; justify-content: center; }
     .download-card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: rgba(255,255,255,0.80); margin-bottom: 6px; }
     .download-card-title { font-family: var(--font-display); font-size: 20px; font-weight: 300; color: #fff; letter-spacing: -0.02em; }
     .download-card-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+    .download-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: #fff; text-decoration: none; transition: opacity 0.2s; }
+    .download-btn:hover { opacity: 0.70; }
 
     .extra-section { padding: 140px 80px; max-width: 1400px; margin: 0 auto; }
     .extra-section-inner { margin: 0 auto; }
@@ -281,10 +283,11 @@
         <p data-i18n="dl_body2">You'll need an email address and a farm name to get started. If your operation has multiple users, you can add the rest of your team once your account is set up.</p>
       </div>
       <div class="download-card">
-        <div class="download-card-icon"><svg width="50" height="50" viewBox="0 0 1080 1080" fill="none"><path fill="#0c0f13" d="M540,5C244.53,5,5,244.53,5,540s239.53,535,535,535,535-239.53,535-535S835.47,5,540,5ZM782.03,876c-160.85,42.72-327.63,41.18-483.88-.19-127.74-33.82-203.82-165.56-169.39-293.13,43.42-160.87,127.94-304.8,241.55-419.77,93.19-94.3,246.14-94.3,339.32,0,113.67,115.02,198.21,259.03,241.61,419.98,34.39,127.53-41.56,259.21-169.22,293.11Z"/></svg></div>
+        <div class="download-card-icon"><svg width="64" height="64" viewBox="0 0 1080 1080" fill="none"><path fill="#0c0f13" d="M540,5C244.53,5,5,244.53,5,540s239.53,535,535,535,535-239.53,535-535S835.47,5,540,5ZM782.03,876c-160.85,42.72-327.63,41.18-483.88-.19-127.74-33.82-203.82-165.56-169.39-293.13,43.42-160.87,127.94-304.8,241.55-419.77,93.19-94.3,246.14-94.3,339.32,0,113.67,115.02,198.21,259.03,241.61,419.98,34.39,127.53-41.56,259.21-169.22,293.11Z"/></svg></div>
         <div>
           <div class="download-card-label" data-i18n="card_label">Available on</div>
           <div class="download-card-title" data-i18n="card_title">App Store, Google Play &amp; Web</div>
+          <a href="https://orth.onelink.me/mfIw/k92a8wdr" target="_blank" rel="noopener noreferrer" class="download-btn"><span data-i18n="dl_btn">Download for free</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
     </div>
@@ -1065,7 +1068,8 @@ var TRANSLATIONS = {
     "ui_upload_disease": "Upload disease image",
     "ui_learn_line1": "Learn how 180K growers",
     "ui_learn_line2": "use ORTH daily.",
-    "ui_plots_btn": "Plots"
+    "ui_plots_btn": "Plots",
+    "dl_btn": "Download for free"
   },
   "es": {
     "mobile_block": "Esta guía está diseñada para visualización en <em>escritorio</em>.",
@@ -1084,11 +1088,11 @@ var TRANSLATIONS = {
     "card_title": "App Store, Google Play y Web",
     "card_sub": "Busca ORTH o visita app.orth.com",
     "farm_title": "Crea tu <em>finca.</em>",
-    "farm_body1": "Antes de añadir parcelas, ORTH te pide que configures tu finca. Dale un nombre y ubicación. Se convierte en el contenedor principal de todo lo que ORTH registra para ti.",
+    "farm_body1": "Antes de añadir lotes, ORTH te pide que configures tu finca. Dale un nombre y ubicación. Se convierte en el contenedor principal de todo lo que ORTH registra para ti.",
     "farm_body2": "Si gestionas más de una finca, puedes crear varias y cambiar entre ellas en cualquier momento.",
     "draw_title": "Dibuja tus <em>lotes</em> en el mapa.",
     "draw_body1": "ORTH construye su inteligencia alrededor de tu finca. Usa la vista de mapa para dibujar los límites de cada lote. Pulsa Dibujar, traza el perímetro y confirma.",
-    "draw_body2": "Puedes dibujar tantas parcelas como requiera tu operación. Cada una se convierte en una unidad independiente que ORTH sigue por separado.",
+    "draw_body2": "Puedes dibujar tantos lotes como requiera tu operación. Cada uno se convierte en una unidad independiente que ORTH sigue por separado.",
     "draw_tip": "Traza los límites con la mayor precisión posible. ORTH usa la forma y el área para calcular volúmenes de riego, cobertura de aplicaciones y proyecciones de rendimiento.",
     "name_title": "Nombra tu <em>lote.</em>",
     "name_body1": "Dale a cada lote un nombre que reconocerás en el campo. La mayoría usa una combinación de posición y variedad, como Lote Norte o Lote Sur.",
@@ -1097,7 +1101,7 @@ var TRANSLATIONS = {
     "crop_body1": "Dile a ORTH qué estás cultivando. Elige tu cultivo de la lista. ORTH construye su inteligencia alrededor del cultivo específico de cada lote, por lo que cuanto más preciso sea esto, más relevantes serán todas las recomendaciones.",
     "crop_tip": "Si tu variedad no aparece, elige la más parecida e infórmalo a tu agrónomo. La biblioteca de cultivos de ORTH se actualiza regularmente.",
     "var_title": "Confirma tu <em>variedad.</em>",
-    "var_body1": "Dentro de tu cultivo, selecciona la variedad específica de esta parcela. La variedad determina el modelo de crecimiento que aplica ORTH: umbrales, fenología y demanda de agua.",
+    "var_body1": "Dentro de tu cultivo, selecciona la variedad específica de este lote. La variedad determina el modelo de crecimiento que aplica ORTH: umbrales, fenología y demanda de agua.",
     "var_body2": "Si un lote tiene más de una variedad, crea un lote separado para cada una.",
     "det_title": "Completa los <em>datos</em> de tu lote.",
     "det_body1": "ORTH solicita datos agronómicos sobre cada lote: tipo de suelo, sistema de riego, densidad de siembra y fecha de plantación.",
@@ -1111,16 +1115,16 @@ var TRANSLATIONS = {
     "start_body2": "Elige una para empezar, o escribe tu propia pregunta directamente.",
     "chat_title": "Haz tu primera <em>pregunta.</em>",
     "chat_body1": "ORTH está listo para responder preguntas sobre tus lotes desde el momento en que se completa la configuración. Pregunta cualquier cosa que le preguntarías a un agrónomo con experiencia.",
-    "chat_body2": "ORTH responde en el contexto de tus lotes específicas, tu cultivo y tus condiciones actuales.",
+    "chat_body2": "ORTH responde en el contexto de tus lotes específicos, tu cultivo y tus condiciones actuales.",
     "ins_title": "Consulta tus <em>informes</em> diarios.",
     "ins_body1": "Cada mañana, ORTH destaca lo más importante para ese día en tus lotes. Calendario de riego, señales de plagas, riesgos meteorológicos. No tienes que ir a buscarlo.",
     "ins_body2": "Cada informe enlaza con una recomendación sobre la que puedes actuar. El objetivo es empezar el día sabiendo lo que te exige.",
     "wx_title": "Abre el <em>Centro Meteorológico.</em>",
-    "wx_body1": "El Centro Meteorológico te ofrece una previsión hiperlocal para tus lotes exactas. Temperatura, viento, humedad y ETo se registran e interpretan en términos de lo que significan para tu cultivo.",
+    "wx_body1": "El Centro Meteorológico te ofrece una previsión hiperlocal para tus lotes exactos. Temperatura, viento, humedad y ETo se registran e interpretan en términos de lo que significan para tu cultivo.",
     "wx_body2": "El tiempo en ORTH no es un widget. Es una variable que recorre cada recomendación que el sistema genera.",
     "al_title": "Revisa tus <em>alertas.</em>",
     "al_body1": "Las alertas son la señal de ORTH de que algo requiere tu atención hoy. Estrés térmico cerca de un umbral. Una presión de plagas creciendo en Lote Este. Una ventana para actuar antes de que el pronóstico la cierre.",
-    "al_body2": "Las alertas se ordenan por urgencia y están vinculadas a el lote específica. Toca cualquier alerta para ver el panorama completo y la respuesta recomendada.",
+    "al_body2": "Las alertas se ordenan por urgencia y están vinculadas al lote específico. Toca cualquier alerta para ver el panorama completo y la respuesta recomendada.",
     "footer": "Aydi Technologies &copy; 2026. Todos los derechos reservados.",
     "ui_plot_q": "¿Cuál es el nombre de tu lote?",
     "ui_crop_q": "¿Qué cultivo tienes en Lote Norte?",
@@ -1184,7 +1188,7 @@ var TRANSLATIONS = {
     "free_name": "Free",
     "free_cap": "Empieza a construir la capa de inteligencia de tu finca. Dibuja tus lotes, define tus cultivos y pregunta a ORTH lo que necesitas cada día. Sin límite de tiempo. Sin tarjeta de crédito.",
     "plus_name": "Plus",
-    "plus_cap": "Sabe lo que cada lote necesita antes de que te lo muestre. Preguntas ilimitadas, informes diarios por parcela, alertas de enfermedades y clima, y tres años de historial meteorológico para cada decisión de la campaña.",
+    "plus_cap": "Sabe lo que cada lote necesita antes de que te lo muestre. Preguntas ilimitadas, informes diarios por lote, alertas de enfermedades y clima, y tres años de historial meteorológico para cada decisión de la campaña.",
     "teams_name": "Teams",
     "teams_cap": "Lleva toda tu operación a una sola inteligencia compartida. Agrónomos, gestores y operadores trabajan con los mismos datos, las mismas alertas y las mismas recomendaciones. Con controles de acceso e informes de uso.",
     "cta_h2": "Listo para unirte a 180.000 agricultores que cambian <em>cómo piensa el campo.</em>",
@@ -1257,7 +1261,8 @@ var TRANSLATIONS = {
     "ui_upload_disease": "Subir imagen de enfermedad",
     "ui_learn_line1": "Aprende cómo 180K agricultores",
     "ui_learn_line2": "usan ORTH a diario.",
-    "ui_plots_btn": "Lotes"
+    "ui_plots_btn": "Lotes",
+    "dl_btn": "Descarga gratis"
   },
   "pt": {
     "mobile_block": "Este guia foi desenvolvido para visualização em <em>computador</em>.",
@@ -1449,7 +1454,8 @@ var TRANSLATIONS = {
     "ui_upload_disease": "Carregar imagem de doença",
     "ui_learn_line1": "Aprenda como 180K agricultores",
     "ui_learn_line2": "usam o ORTH diariamente.",
-    "ui_plots_btn": "Lotes"
+    "ui_plots_btn": "Lotes",
+    "dl_btn": "Descarregar gratuitamente"
   },
   "fr": {
     "mobile_block": "Ce guide est conçu pour une consultation sur <em>ordinateur</em>.",
@@ -1641,7 +1647,8 @@ var TRANSLATIONS = {
     "ui_upload_disease": "Téléverser image de maladie",
     "ui_learn_line1": "Découvrez comment 180K agriculteurs",
     "ui_learn_line2": "utilisent ORTH au quotidien.",
-    "ui_plots_btn": "Lotes"
+    "ui_plots_btn": "Lotes",
+    "dl_btn": "Télécharger gratuitement"
   },
   "de": {
     "mobile_block": "Diese Anleitung ist für die <em>Desktop</em>-Ansicht konzipiert.",
@@ -1833,10 +1840,10 @@ var TRANSLATIONS = {
     "ui_upload_disease": "Krankheitsbild hochladen",
     "ui_learn_line1": "Erfahren Sie, wie 180K Landwirte",
     "ui_learn_line2": "ORTH täglich nutzen.",
-    "ui_plots_btn": "Schläge"
+    "ui_plots_btn": "Schläge",
+    "dl_btn": "Kostenlos herunterladen"
   }
 };
-
 var LANG = 'en';
 
 
