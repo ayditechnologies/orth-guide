@@ -189,14 +189,16 @@
       .step-web { padding: 72px 0 40px; margin: 0 -24px; }
       .step-web-copy { padding: 0 24px; }
       .web-iframe-scroll {
+        display: flex;
+        align-items: flex-start;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 0 0 16px;
+        padding: 0 24px 16px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
       .web-iframe-scroll::-webkit-scrollbar { display: none; }
-      .web-iframe { transform: scale(0.7); transform-origin: top left; width: 1240px !important; margin-left: 24px; margin-right: calc(1240px * (0.7 - 1) + 24px) !important; margin-bottom: calc(714px * (0.7 - 1)) !important; }
+      .web-iframe { flex-shrink: 0; transform: scale(0.7); transform-origin: top left; width: 1240px !important; margin-right: calc(1240px * (0.7 - 1)) !important; margin-bottom: calc(714px * (0.7 - 1)) !important; }
 
       /* 8. ALL OTHER SECTIONS + FOOTER */
       .extra-section { padding: 80px 24px; }
