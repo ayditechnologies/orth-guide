@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
     <meta property="og:title" content="Getting Started · ORTH" />
   <meta property="og:description" content="Set up in minutes. Make better calls from day one." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/ayditechnologies/orth-brand/main/orth-starting-thumb.jpg" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ayditechnologies/orth-guide/main/orth-starting-thumb.jpg" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/ayditechnologies/orth-brand/main/orth-starting-thumb.jpg" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ayditechnologies/orth-guide/main/orth-starting-thumb.jpg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started · ORTH</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,14 +148,14 @@
       .step-screen { justify-content: center; }
       .screen-wrap { transform: scale(0.92); transform-origin: top center; display: block; margin-bottom: calc((0.92 - 1) * 480px); }
 
-      /* 5. QUESTIONS — grid is the scroll container; headings stay fixed */
+      /* 5. QUESTIONS — CSS grid so rows share heights automatically */
       .qs-inner { overflow: visible; margin: 0; }
       .qs-grid {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        height: calc(3 * 80px + 2 * 12px + 24px);
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        justify-content: start;
         gap: 12px;
         overflow-x: auto;
         overflow-y: hidden;
@@ -166,7 +166,7 @@
         scrollbar-width: none;
       }
       .qs-grid::-webkit-scrollbar { display: none; }
-      .qs-card { height: 80px; }
+      .qs-card { overflow: hidden; }
 
       /* 6. PLANS — grid is the scroll container; headings stay fixed */
       .extra-section:has(.plans-grid) .extra-section-inner { overflow: visible; }
@@ -191,12 +191,12 @@
       .web-iframe-scroll {
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 0 24px 16px;
+        padding: 0 0 16px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
       .web-iframe-scroll::-webkit-scrollbar { display: none; }
-      .web-iframe { transform: scale(0.7); transform-origin: top left; width: 1240px !important; margin-right: calc(1240px * (0.7 - 1)) !important; margin-bottom: calc(714px * (0.7 - 1)) !important; }
+      .web-iframe { transform: scale(0.7); transform-origin: top left; width: 1240px !important; margin-left: 24px; margin-right: calc(1240px * (0.7 - 1) + 24px) !important; margin-bottom: calc(714px * (0.7 - 1)) !important; }
 
       /* 8. ALL OTHER SECTIONS + FOOTER */
       .extra-section { padding: 80px 24px; }
@@ -455,18 +455,18 @@
     <h2 class="extra-h2" data-i18n="qs_h2" style="text-align:center;max-width:680px;margin:0 auto 16px;">The questions growers bring to <em>every season.</em></h2>
     <p class="extra-sub" data-i18n="qs_sub" style="text-align:center;margin:0 auto 56px;">ORTH is built to answer what you actually face in the field.</p>
     <div class="qs-grid">
-      <div class="qs-card" style="max-width:300px;" data-i18n="qs_c1">When is the right window to apply fungicide for septoria in my soft wheat?</div>
-      <div class="qs-card" style="max-width:220px;" data-i18n="qs_c2">Wind has been over 15 km/h for three days. Can I still spray?</div>
-      <div class="qs-card" style="max-width:380px;" data-i18n="qs_c3">My soil analysis shows low organic matter. What does that mean for my nitrogen program?</div>
-      <div class="qs-card" style="max-width:260px;" data-i18n="qs_c4">How much ETo did my plots accumulate this week?</div>
-      <div class="qs-card" style="max-width:340px;" data-i18n="qs_c5">Lote Norte is showing uneven germination. What could be causing it?</div>
-      <div class="qs-card" style="max-width:200px;" data-i18n="qs_c6">Is this heat stress or water deficit on my sunflower?</div>
-      <div class="qs-card" style="max-width:360px;" data-i18n="qs_c7">What is the optimal nitrogen top-dressing rate for barley at this stage?</div>
-      <div class="qs-card" style="max-width:310px;" data-i18n="qs_c8">We had a late frost last night. What should I look for in the crop today?</div>
-      <div class="qs-card" style="max-width:240px;" data-i18n="qs_c9">I have ryegrass pressure across Lote Sur. Which herbicide fits my rotation?</div>
-      <div class="qs-card" style="max-width:390px;" data-i18n="qs_c10">Rain is forecast for the next five days. Should I hold off on the second nitrogen application?</div>
-      <div class="qs-card" style="max-width:230px;" data-i18n="qs_c11">Is the yellow discolouration a nutrition issue or disease?</div>
-      <div class="qs-card" style="max-width:350px;" data-i18n="qs_c12">Which variety of durum wheat performs best in dry April conditions in Salamanca?</div>
+      <div class="qs-card" style="max-width:300px;" data-i18n="qs_c1"><span>When is the right window to apply fungicide for septoria in my soft wheat?</span></div>
+      <div class="qs-card" style="max-width:220px;" data-i18n="qs_c2"><span>Wind has been over 15 km/h for three days. Can I still spray?</span></div>
+      <div class="qs-card" style="max-width:380px;" data-i18n="qs_c3"><span>My soil analysis shows low organic matter. What does that mean for my nitrogen program?</span></div>
+      <div class="qs-card" style="max-width:260px;" data-i18n="qs_c4"><span>How much ETo did my plots accumulate this week?</span></div>
+      <div class="qs-card" style="max-width:340px;" data-i18n="qs_c5"><span>Lote Norte is showing uneven germination. What could be causing it?</span></div>
+      <div class="qs-card" style="max-width:200px;" data-i18n="qs_c6"><span>Is this heat stress or water deficit on my sunflower?</span></div>
+      <div class="qs-card" style="max-width:360px;" data-i18n="qs_c7"><span>What is the optimal nitrogen top-dressing rate for barley at this stage?</span></div>
+      <div class="qs-card" style="max-width:310px;" data-i18n="qs_c8"><span>We had a late frost last night. What should I look for in the crop today?</span></div>
+      <div class="qs-card" style="max-width:240px;" data-i18n="qs_c9"><span>I have ryegrass pressure across Lote Sur. Which herbicide fits my rotation?</span></div>
+      <div class="qs-card" style="max-width:390px;" data-i18n="qs_c10"><span>Rain is forecast for the next five days. Should I hold off on the second nitrogen application?</span></div>
+      <div class="qs-card" style="max-width:230px;" data-i18n="qs_c11"><span>Is the yellow discolouration a nutrition issue or disease?</span></div>
+      <div class="qs-card" style="max-width:350px;" data-i18n="qs_c12"><span>Which variety of durum wheat performs best in dry April conditions in Salamanca?</span></div>
     </div>
   </div>
 </div>
