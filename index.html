@@ -12,7 +12,7 @@
   <title>Getting Started · ORTH</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/iconoir@7.10.0/css/iconoir.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Source+Serif+4:ital,wght@1,400&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Source+Serif+4:ital,wght@1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'Cocogoose';
@@ -215,6 +215,60 @@
     /* DESKTOP BLOCKER — uncomment to re-enable */
     /* @media (max-width: 1280px) { .mobile-block { display: flex; } body > *:not(.mobile-block) { display: none !important; } } */
 
+    /* ═══ ARABIC + RTL ═══════════════════════════════════════════════════ */
+    /* Strategy: page chrome flips fully (dir=rtl). UI mockup screens stay   */
+    /* LTR (their inline styles use physical properties and would break). */
+    /* Noto Sans Arabic loads via Google Fonts with built-in unicode-range, */
+    /* so Arabic glyphs route to it and Latin glyphs stay in DM Sans/etc. */
+
+    :root { --font-arabic: 'Noto Sans Arabic'; }
+
+    html[lang="ar"] body { font-family: var(--font-arabic), 'Nunito Sans', sans-serif; }
+    html[lang="ar"] .hero-content h1,
+    html[lang="ar"] .step-title,
+    html[lang="ar"] .extra-h2,
+    html[lang="ar"] .download-card-title,
+    html[lang="ar"] .plan-name { font-family: var(--font-arabic), 'Cocogoose', sans-serif; font-weight: 300; letter-spacing: 0; line-height: 1.3; }
+    html[lang="ar"] em { font-family: var(--font-arabic), 'Source Serif 4', serif; font-style: normal; font-weight: 600; font-size: 1em; }
+
+    html[dir="rtl"] body { direction: rtl; }
+    html[dir="rtl"] .hero-content,
+    html[dir="rtl"] .hero-content h1,
+    html[dir="rtl"] .hero-content .hero-sub,
+    html[dir="rtl"] .step-copy,
+    html[dir="rtl"] .step-body,
+    html[dir="rtl"] .step-tip p,
+    html[dir="rtl"] .qs-card,
+    html[dir="rtl"] .plan-card,
+    html[dir="rtl"] .plan-cap,
+    html[dir="rtl"] .download-card-label,
+    html[dir="rtl"] .download-card-title,
+    html[dir="rtl"] .download-card-sub { text-align: right; }
+
+    html[dir="rtl"] .hero-content .hero-meta { flex-direction: row-reverse; justify-content: flex-end; }
+    html[dir="rtl"] .download-card { flex-direction: row-reverse; text-align: right; }
+    html[dir="rtl"] .download-btn svg { transform: scaleX(-1); }
+    html[dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+    html[dir="rtl"] .qs-grid { direction: rtl; }
+    html[dir="rtl"] .plans-grid { direction: rtl; }
+
+    /* SCREENS: lock to LTR so inline-styled mockups don't fracture. */
+    html[dir="rtl"] .screen-wrap,
+    html[dir="rtl"] .web-iframe-scroll,
+    html[dir="rtl"] .web-iframe { direction: ltr; }
+
+    /* Within screens, route Arabic glyphs to Noto Sans Arabic without */
+    /* disturbing inline DM Sans for Latin/numbers. Google Fonts ships */
+    /* Noto Sans Arabic with unicode-range covering only Arabic, so Latin */
+    /* glyphs cleanly fall through to DM Sans. */
+    html[lang="ar"] .screen-wrap *,
+    html[lang="ar"] .web-iframe-scroll * { font-family: var(--font-arabic), 'DM Sans', sans-serif; }
+
+    /* Mobile responsive: keep RTL behaviour intact when mobile dropdown shows */
+    @media (max-width: 768px) {
+      html[dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+    }
+
   </style>
 </head>
 <body>
@@ -231,6 +285,7 @@
     <li><span onclick="chooseLang(null,'pt','Português')">Português</span></li>
     <li><span onclick="chooseLang(null,'fr','Français')">Français</span></li>
     <li><span onclick="chooseLang(null,'de','Deutsch')">Deutsch</span></li>
+    <li><span onclick="chooseLang(null,'ar','العربية')">العربية</span></li>
   </ul>
   <div class="nav-right lang-switcher" id="lang-switcher">
     <button class="lang-btn" id="lang-btn" onclick="toggleLangDropdown()">
@@ -243,6 +298,7 @@
       <div class="lang-option" onclick="chooseLang(this,'pt','Português')">Português</div>
       <div class="lang-option" onclick="chooseLang(this,'fr','Français')">Français</div>
       <div class="lang-option" onclick="chooseLang(this,'de','Deutsch')">Deutsch</div>
+      <div class="lang-option" onclick="chooseLang(this,'ar','العربية')">العربية</div>
     </div>
   </div>
 </nav>
@@ -1836,8 +1892,201 @@ var TRANSLATIONS = {
     "ui_learn_line2": "ORTH täglich nutzen.",
     "ui_plots_btn": "Schläge",
     "dl_btn": "Kostenlos herunterladen"
+  },
+  "ar": {
+    "mobile_block": "هذا الدليل مُصمَّم للعرض على <em>شاشة أكبر</em>.",
+    "hero_h1": "هيّئ خلال دقائق. اتخذ قرارات أفضل <em>منذ اليوم الأول.</em>",
+    "hero_sub": "كل ما تحتاجه لتشغيل ORTH في مزرعتك. ابدأ بقطعك. وانتهِ بذكاء يتحرك مع الموسم.",
+    "meta_platform": "المنصة",
+    "meta_time_label": "الوقت حتى أول قطعة",
+    "meta_time_value": "أقل من 5 دقائق",
+    "web_title": "ORTH على <em>الويب.</em>",
+    "web_body1": "ORTH متاح على الويب كما هو متاح على الجوال. تجربة الويب تمنحك رؤية أوسع لقطعك وفئاتك والذكاء الزراعي على مساحة أرحب.",
+    "web_body2": "كل شيء يبقى متزامناً. ما تُعدّه على الجوال يكون متاحاً على الويب فوراً، والعكس صحيح.",
+    "dl_title": "نزّل التطبيق <em>وأنشئ حسابك.</em>",
+    "dl_body1": "ORTH متاح على iOS وAndroid والويب. ابحث عن ORTH في App Store أو Google Play، أو افتح app.orth.com في أي متصفح.",
+    "dl_body2": "ستحتاج إلى عنوان بريد إلكتروني واسم مزرعة لتبدأ. إذا كانت عمليتك تضم عدة مستخدمين، يمكنك إضافة بقية فريقك بعد إعداد حسابك.",
+    "card_label": "متاح على",
+    "card_title": "App Store وGoogle Play والويب",
+    "card_sub": "ابحث عن ORTH أو زُر app.orth.com",
+    "farm_title": "أنشئ <em>مزرعتك.</em>",
+    "farm_body1": "قبل إضافة قطعك، يطلب منك ORTH إعداد مزرعتك. أعطها اسماً وموقعاً. تصبح هذه الحاوية الرئيسية لكل ما يتابعه ORTH نيابةً عنك.",
+    "farm_body2": "إن كنت تدير أكثر من مزرعة أو عملية، يمكنك إنشاء عدة مزارع والتنقّل بينها في أي وقت.",
+    "draw_title": "ارسم <em>قطعك</em> على الخريطة.",
+    "draw_body1": "يبني ORTH ذكاءه حول أرضك. استخدم عرض الخريطة لرسم حدود كل قطعة. اضغط على رسم، تتبّع المحيط، وأكّد.",
+    "draw_body2": "يمكنك رسم أي عدد من القطع تتطلبه عمليتك. كل قطعة تصبح وحدة مستقلة يتابعها ORTH على حدة.",
+    "draw_tip": "تتبّع حدود القطعة بأكبر دقة ممكنة. يستخدم ORTH الشكل والمساحة لحساب أحجام الري وتغطية الرش وتوقعات المحصول.",
+    "name_title": "سمِّ <em>قطعتك.</em>",
+    "name_body1": "أعطِ كل قطعة اسماً تعرفه في الحقل. يستخدم معظم المزارعين مزيجاً من موقع البلوك والصنف، مثل Lote Norte أو Lote Sur.",
+    "name_body2": "يبقى الاسم مرافقاً لكل رؤية وتنبيه وتوصية يرسلها لك ORTH. اجعله محدداً بما يكفي للتصرف عليه فوراً.",
+    "crop_title": "اختر <em>محصولك.</em>",
+    "crop_body1": "أخبر ORTH بما تزرعه. اختر محصولك من القائمة. يبني ORTH ذكاءه حول المحصول المحدد في كل قطعة، فكلما كان هذا أدق، كانت كل توصية تتبعه أوثق صلة.",
+    "var_title": "أكّد <em>صنفك.</em>",
+    "var_body1": "ضمن محصولك، اختر الصنف المحدد المزروع في هذه القطعة. يحدد الصنف نموذج النمو الذي يطبّقه ORTH، بما في ذلك عتبات الحساسية والتوقيت الفينولوجي ومنحنيات الطلب على الماء.",
+    "var_body2": "إذا كانت القطعة تحمل أكثر من صنف، أنشئ قطعة منفصلة لكل صنف.",
+    "det_title": "املأ <em>تفاصيل</em> قطعتك.",
+    "det_body1": "يطلب منك ORTH عدداً من التفاصيل الزراعية لكل قطعة: نوع التربة، نظام الري، كثافة الزراعة، وتاريخ الزراعة.",
+    "det_body2": "هذه ليست حقولاً إدارية. كل إجابة تُشكّل النماذج التي يديرها ORTH لأرضك. املأ ما تعرفه. يمكنك تحديث أي شيء لاحقاً.",
+    "up_title": "ارفع <em>سجلاتك.</em>",
+    "up_body1": "إن كانت لديك بيانات حصاد سابقة، أو تحاليل تربة، أو تقارير مختبر، فارفعها هنا. يقرأ ORTH هذه المستندات ويستخدمها لبناء صورة أولية لأرضك تحتاج موسماً كاملاً لتُجمَع لولا ذلك.",
+    "up_body2": "أي صيغة تعمل. صور السجلات الورقية مقبولة كذلك.",
+    "up_tip": "هذه الخطوة اختيارية لكنها تُحدث فرقاً. المزارعون الذين يرفعون السجلات التاريخية يحصلون على توصيات أدقّ منذ الأسبوع الأول من الاستخدام.",
+    "start_title": "اختر من <em>أين تبدأ.</em>",
+    "start_body1": "بمجرد إعداد قطعك، يقدّم لك ORTH مجموعة من المحفّزات الأولية بناءً على محصولك والظروف الراهنة. هذه محددة بما يحدث على أرضك الآن.",
+    "start_body2": "اختر واحداً لتبدأ، أو اكتب سؤالك مباشرة.",
+    "chat_title": "اطرح <em>سؤالك</em> الأول.",
+    "chat_body1": "ORTH جاهز للإجابة عن أسئلتك حول قطعك من لحظة اكتمال الإعداد. اسأل أي شيء تسأل عنه مهندساً زراعياً متمرّساً: عن جدول ريّك، عن ورقة لست متأكداً منها، عمّا تعنيه الأيام العشرة القادمة لمحصولك.",
+    "chat_body2": "يجيب ORTH في سياق قطعك المحددة، ومحصولك، وظروفك الراهنة.",
+    "ins_title": "تابع <em>رؤاك</em> اليومية.",
+    "ins_body1": "كل صباح، يُبرز لك ORTH ما يهم فعلاً ذلك اليوم عبر قطعك. توقيت الري، إشارات ضغط الآفات، المخاطر التي يحركها الطقس. لا تحتاج إلى البحث عنها.",
+    "ins_body2": "كل رؤية ترتبط مباشرة بتوصية يمكنك التصرف عليها. الهدف أن تبدأ يومك وأنت تعرف ما يطلبه منك.",
+    "wx_title": "افتح <em>مركز الطقس.</em>",
+    "wx_body1": "يمنحك مركز الطقس توقعات دقيقة الموقع لقطعك بالضبط، لا لأقرب بلدة. تُرصَد درجة الحرارة والرياح والرطوبة وETo وتُفسَّر بدلالة ما تعنيه لمحصولك في هذه المرحلة من الموسم.",
+    "wx_body2": "الطقس في ORTH ليس عنصر واجهة. هو متغير يَسري في كل توصية يصدرها النظام.",
+    "al_title": "راجع <em>تنبيهاتك.</em>",
+    "al_body1": "التنبيهات هي إشارة ORTH إلى أن أمراً ما يتطلب انتباهك اليوم. إجهاد حراري يقترب من العتبة. ضغط آفات يتراكم في Lote Este. نافذة للتصرف قبل أن تُغلقها التوقعات.",
+    "al_body2": "تُرتَّب التنبيهات بحسب الأهمية وتُربَط بالقطعة المحددة التي تعنيها. اضغط على أي تنبيه لرؤية الصورة الكاملة والاستجابة الموصى بها.",
+    "footer": "Aydi Technologies &copy; 2026. جميع الحقوق محفوظة.",
+    "ui_plot_q": "ما اسم قطعتك؟",
+    "ui_crop_q": "ما المحصول الذي تزرعه في Lote Norte؟",
+    "ui_my_crops": "محاصيلي",
+    "ui_all_crops": "كل المحاصيل",
+    "ui_new_crop": "محصول جديد",
+    "ui_var_q": "ما صنف القمح الطري الذي تزرعه؟",
+    "ui_new_var": "صنف جديد",
+    "ui_back": "رجوع",
+    "ui_continue": "متابعة",
+    "ui_create": "إنشاء قطعة",
+    "ui_complete": "أكمل ملف القطعة",
+    "ui_ask": "اسأل ORTH",
+    "ui_plot_name_l": "اسم القطعة",
+    "ui_plot_type": "نوع القطعة",
+    "ui_not_set": "غير محدد",
+    "ui_area": "المساحة",
+    "ui_markets": "الأسواق المستهدفة",
+    "ui_pp_head": "تبحث عن إرشادات تغذية الحبوب؟",
+    "ui_pp_label": "التغذية (اقتراحات)",
+    "ui_pp1": "متى أرشّ مبيد الفطريات لمرض السبتوريا في القمح الطري؟",
+    "ui_pp2": "قيّم تحليل تربتي لتحديد معدل النيتروجين المناسب.",
+    "ui_pp3": "ما المعدل الأمثل للتسميد النيتروجيني العلوي للقمح الطري في أبريل؟",
+    "ui_pp4": "ما المبيد العشبي الذي أستخدمه لعشب الراي في قمح سلامانكا؟",
+    "ui_user_msg": "أوراق القمح تظهر بقعاً صفراء بين العروق. مشكلة فطرية؟",
+    "ui_chat_ttl": "السبتوريا على القمح",
+    "ui_chat_body": "البقع الكلوروزية ذات الهالات الصفراء على الأوراق الفتية متسقة مع Septoria tritici، وهي شائعة في كاستيا وليون بعد فترات الرطوبة في أبريل. تحقّق من آخر دورة هطول وكثافة المحصول.",
+    "ui_chat_ctx": "Lote Norte · 14°C متوسط · 8.4 ملم هطول حديث",
+    "ui_chat_rec": "طبّق مبيد فطريات تريازولي (تيبوكونازول 25%) بمعدل 1.0 لتر/هكتار خلال 48 ساعة",
+    "ui_placeholder": "اسأل ORTH…",
+    "ui_private": "خاص",
+    "ui_al1t": "خطر الصدأ الأصفر: Lote Norte",
+    "ui_al1s": "بثرات صفراء مكتشفة في القطاع الجنوبي. استكشف اليوم.",
+    "ui_al2t": "أفضل نافذة رش: 6–10 صباحاً غداً",
+    "ui_al2s": "الرياح أقل من 12 كم/س، الحرارة 17–19°C. لا مطر لـ12 ساعة.",
+    "ui_al3t": "التسميد النيتروجيني العلوي N2: التطبيق مستحقّ",
+    "ui_al3s": "طبّق خلال 72 ساعة. ظروف الرياح مواتية.",
+    "ui_al4t": "عدد المنّ: Lote Este",
+    "ui_al4s": "Metopolophium dirhodum نشط. تحقّق من العتبات قبل الجمعة.",
+    "ui_al5t": "تقرير المزرعة اليومي: 21 أبريل",
+    "ui_al5s": "كل الظروف تحت المراقبة عبر Finca La Meseta.",
+    "ui_earlier": "الـ5 أيام السابقة",
+    "qs_h2": "الأسئلة التي يطرحها المزارعون <em>كل موسم.</em>",
+    "qs_sub": "ORTH مبني للإجابة عمّا تواجهه فعلاً في الحقل.",
+    "qs_c1": "متى النافذة المناسبة لرشّ مبيد الفطريات للسبتوريا في قمحي الطري؟",
+    "qs_c2": "الرياح فوق 15 كم/س منذ ثلاثة أيام. هل ما زال بإمكاني الرش؟",
+    "qs_c3": "تحليل تربتي يُظهر مادة عضوية منخفضة. ماذا يعني ذلك لبرنامج التسميد النيتروجيني؟",
+    "qs_c4": "كم بلغ تراكم ETo في قطعي هذا الأسبوع؟",
+    "qs_c5": "Lote Norte يُظهر إنباتاً غير منتظم. ما الذي قد يسبّبه؟",
+    "qs_c6": "هل هذا إجهاد حراري أم نقص ماء على عبّاد شمسي؟",
+    "qs_c7": "ما المعدل الأمثل للتسميد النيتروجيني العلوي للشعير في هذه المرحلة؟",
+    "qs_c8": "وقعت موجة صقيع متأخرة الليلة الماضية. ما الذي أبحث عنه في المحصول اليوم؟",
+    "qs_c9": "أعاني من ضغط عشب الراي عبر Lote Sur. أيّ مبيد عشبي يناسب دورتي؟",
+    "qs_c10": "المطر متوقَّع للأيام الخمسة القادمة. هل أؤجّل التطبيق النيتروجيني الثاني؟",
+    "qs_c11": "هل الاصفرار مشكلة تغذية أم مرض؟",
+    "qs_c12": "أيّ صنف من القمح القاسي يؤدّي أفضل في ظروف أبريل الجافة بسلامانكا؟",
+    "conf_h2": "كلما عرف ORTH أكثر، <em>زادت دقّته.</em>",
+    "conf_sub": "يخصّص ORTH درجة ثقة لكل توصية يصدرها. أعطِه سياقاً أكثر يعطك دقة أكثر. أكمل ملفات قطعك، وارفع تحاليل تربتك وتقارير المختبر، وراقب الدرجة ترتفع.",
+    "plans_h2": "مبني للمزارعين الذين يعتمدون على <em>كل قرار.</em>",
+    "plans_sub": "ORTH مجاني. ابدأ اليوم، بلا حدّ زمني وبلا حاجة إلى بطاقة ائتمان.",
+    "free_name": "Free",
+    "free_cap": "ابدأ ببناء طبقة الذكاء لمزرعتك. ارسم قطعك، عرّف محاصيلك، واسأل ORTH الأسئلة التي تشكّل كل يوم. بلا حدّ زمني. بلا بطاقة ائتمان.",
+    "plus_name": "Plus",
+    "plus_cap": "اعرف ما تحتاجه كل قطعة قبل أن تُظهره لك. أسئلة غير محدودة، رؤى يومية لكل قطعة، تنبيهات أمراض ومخاطر طقس، وثلاث سنوات من الطقس التاريخي تُغذّي كل قرار تتخذه هذا الموسم.",
+    "teams_name": "Teams",
+    "teams_cap": "اجمع عمليتك بالكامل في ذكاء واحد مشترك. مهندسون زراعيون، ومدراء، ومشغّلو مزارع يعملون من البيانات نفسها، والتنبيهات نفسها، والتوصيات نفسها. مع ضوابط وصول كاملة وتقارير استخدام.",
+    "cta_h2": "جاهز للانضمام إلى 180,000 مزارع يغيّرون <em>كيف تفكّر الزراعة.</em>",
+    "cta_sub": "ORTH مجاني للبدء. هيّئ قطعتك الأولى في أقل من خمس دقائق واتخذ قرارك الأول بالذكاء الذي يدعمه.",
+    "support_line": "غير متأكد من أين تبدأ؟",
+    "ui_draw": "رسم",
+    "ui_pivot": "محور",
+    "ui_undo": "تراجع",
+    "ui_confirm": "تأكيد",
+    "ui_upload_head": "رفع المستندات والتقارير",
+    "ui_upload_file": "رفع ملف",
+    "ui_insights_nav": "رؤى ORTH",
+    "ui_all_plots": "كل القطع",
+    "ui_all_alerts": "كل التنبيهات",
+    "ui_wx_nav": "الطقس",
+    "ui_temperature": "الحرارة",
+    "ui_wind": "الرياح",
+    "ui_sunrise": "الشروق",
+    "ui_sunset": "الغروب",
+    "ui_orth_insight": "رؤية ORTH",
+    "ui_heat_ttl": "خطر الإجهاد الحراري:",
+    "ui_heat_body": "حرارة شديدة متوقَّعة خلال الـ24 ساعة القادمة. من دون تعديل فوري للري، قد تتعرض المحاصيل لإجهاد حراري وتأثير على المحصول.",
+    "ui_heat_cta": "اضبط الري الآن",
+    "ui_irrig_planner": "مخطّط الري",
+    "ui_fert_planner": "مخطّط التسميد",
+    "ui_eto": "ETo",
+    "ui_precip": "الهطول",
+    "ui_humidity": "الرطوبة",
+    "ui_dewpoint": "نقطة الندى",
+    "ui_uvindex": "مؤشّر UV",
+    "ui_tab_general": "معلومات عامة",
+    "ui_tab_crop": "معلومات المحصول",
+    "ui_tab_soil": "التربة والماء",
+    "ui_tab_docs": "المستندات",
+    "crop_sw": "قمح طري",
+    "crop_dw": "قمح قاسي",
+    "crop_bar": "شعير",
+    "crop_oat": "شوفان",
+    "crop_rye": "جاودار",
+    "crop_sun": "عبّاد الشمس",
+    "crop_mz": "ذرة",
+    "crop_rap": "كانولا",
+    "crop_vtch": "بيقية",
+    "crop_chk": "حمص",
+    "crop_pea": "بازلاء",
+    "crop_sb": "بنجر السكر",
+    "crop_len": "عدس",
+    "crop_sor": "ذرة بيضاء",
+    "crop_rice": "أرز",
+    "ui_spray_window": "نافذة الرش",
+    "ui_avoid": "تجنّب",
+    "ui_farms_label": "المزارع",
+    "ui_add_farm": "أضف مزرعة جديدة",
+    "ui_map_label": "الخريطة",
+    "ui_search": "بحث",
+    "ui_wx_time": "الساعة 8:40 صباحاً في 7 أبريل",
+    "step_prefix": "خطوة",
+    "ui_unlock_title": "أطلق القوة الكاملة لـORTH!",
+    "ui_unlock_body": "احصل على رسائل غير محدودة، ورؤى للقطع، وحسابات الفريق، والمزيد!",
+    "ui_explore_plans": "استكشف الخطط",
+    "ui_web_prompt": "تبحث عن مكافحة آفات أذكى؟",
+    "ui_plots_all": "القطع (الكل)",
+    "ui_private_chat": "محادثة خاصة",
+    "ui_cat_pest": "مكافحة الآفات",
+    "ui_cat_irrig": "الري",
+    "ui_cat_fert": "التسميد",
+    "ui_cat_crop_sel": "اختيار المحصول",
+    "ui_cat_quality": "الجودة والامتثال",
+    "ui_cat_machinery": "الآلات والمعدات",
+    "ui_upload_disease": "ارفع صورة المرض",
+    "ui_learn_line1": "تعرّف كيف يستخدم 180 ألف مزارع",
+    "ui_learn_line2": "ORTH يومياً.",
+    "ui_plots_btn": "القطع",
+    "dl_btn": "حمّل مجاناً"
   }
 };
+
 var LANG = 'en';
 
 
@@ -2080,6 +2329,9 @@ function chooseLang(el, lang, label) {
 
 function setLang(lang) {
   LANG = lang || 'en';
+  // Flip <html> lang/dir so Arabic gets RTL chrome and Noto Sans Arabic font routing
+  document.documentElement.setAttribute('lang', LANG);
+  document.documentElement.setAttribute('dir', LANG === 'ar' ? 'rtl' : 'ltr');
   applyTranslations();
   rebuildScreens();
   if (typeof initWeatherCharts === 'function') { try { initWeatherCharts(); } catch(e) {} }
